@@ -31,6 +31,20 @@
 #include "Assignment-1.h"
 using namespace std;
 
+  /*
+
+      0
+      | <- start from here
+      1
+     /  \ 
+    2   3
+     \ / 
+      4
+      |
+      5
+
+*/
+
 /// TODO: print each path once this method is called, and
 /// add each path as a string into std::set<std::string> paths
 /// Print the path in the format "START: 1->2->4->5->END", 
@@ -52,6 +66,17 @@ void GraphTraversal::printPath(std::vector<const Edge *> &path)
 //node seq in the current path dur traversal 
     //path: vector<NodeID>
 
+//DFS(visited, path, src, dst)
+    //visited.insert(src)
+    //path.push_back(src)
+    //if src == dst then 
+        //Print path; //print node seq of current path 
+    //foreach edge e outEdges(src) do 
+        //if (e.dst != visited)
+            //dfs(visited, path, e.dst, dst);
+    //visited.erase(src);
+    //path.pop_back();
+
 /// TODO: Implement your depth first search here to traverse each program path 
 //(once for any loop) from src to dst
 void GraphTraversal::DFS(const Edge *src_edge, const Node *dst)
@@ -72,31 +97,5 @@ void GraphTraversal::DFS(const Edge *src_edge, const Node *dst)
             path.pop_back();
         }
     }
-    // visited.erase(src_edge->getSrc());
-    // path.pop_back();
 }
 
-  /*
-
-      0
-      | <- start from here
-      1
-     /  \ 
-    2   3
-     \ / 
-      4
-      |
-      5
-
-*/
-
-//DFS(visited, path, src, dst)
-    //visited.insert(src)
-    //path.push_back(src)
-    //if src == dst then 
-        //Print path; //print node seq of current path 
-    //foreach edge e outEdges(src) do 
-        //if (e.dst != visited)
-            //dfs(visited, path, e.dst, dst);
-    //visited.erase(src);
-    //path.pop_back();
