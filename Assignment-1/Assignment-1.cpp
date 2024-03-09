@@ -33,14 +33,70 @@ using namespace std;
 
 /// TODO: print each path once this method is called, and
 /// add each path as a string into std::set<std::string> paths
-/// Print the path in the format "START: 1->2->4->5->END", where -> indicate an edge connecting two node IDs
+/// Print the path in the format "START: 1->2->4->5->END", 
+//where -> indicate an edge connecting two node IDs
 void GraphTraversal::printPath(std::vector<const Edge *> &path)
 {
-    
+    std::string startPath = "START: ";
+    for(size_t i = 1; i < path.size(); i++){
+        startPath += (std::to_string(path[i]->getSrc()->getNodeID()) + "->");
+    }
+    startPath += (std::to_string(path.back()->getDst()->getNodeID()) + "->END");
+    paths.insert(startPath);
+
+    std::cout << startPath << endl;
 };
 
-/// TODO: Implement your depth first search here to traverse each program path (once for any loop) from src to dst
+//mark visited node 
+    //visited: set<NodeID> 
+//node seq in the current path dur traversal 
+    //path: vector<NodeID>
+
+/// TODO: Implement your depth first search here to traverse each program path 
+//(once for any loop) from src to dst
 void GraphTraversal::DFS(const Edge *src_edge, const Node *dst)
 {
+    //mark node as visited
+    visited.insert(src_edge->getSrc());
+    //node seq in the current path during traversal
+    path.push_back(src_edge);
     
+    if(src_edge->getDst() == dst){ 
+        printPath(path); //print node sequence of current path
+    }else{
+        for(const Edge *edge: src_edge->getDst()->getOutEdges()){
+            if(visited.count(edge->getDst()) == 0){
+                DFS(edge, dst);
+            }
+            visited.erase(src_edge->getDst());
+            path.pop_back();
+        }
+    }
+    // visited.erase(src_edge->getSrc());
+    // path.pop_back();
 }
+
+  /*
+
+      0
+      | <- start from here
+      1
+     /  \ 
+    2   3
+     \ / 
+      4
+      |
+      5
+
+*/
+
+//DFS(visited, path, src, dst)
+    //visited.insert(src)
+    //path.push_back(src)
+    //if src == dst then 
+        //Print path; //print node seq of current path 
+    //foreach edge e outEdges(src) do 
+        //if (e.dst != visited)
+            //dfs(visited, path, e.dst, dst);
+    //visited.erase(src);
+    //path.pop_back();
