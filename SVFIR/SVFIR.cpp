@@ -37,8 +37,8 @@ using namespace SVF;
 using namespace llvm;
 using namespace std;
 
-// static llvm::cl::opt<std::string> InputFilename(cl::Positional,
-//         llvm::cl::desc("<input bitcode>"), llvm::cl::init("-"));
+static llvm::cl::opt<std::string> InputFilename(cl::Positional,
+        llvm::cl::desc("<input bitcode>"), llvm::cl::init("-"));
 
 int main(int argc, char ** argv) {
 
@@ -50,22 +50,19 @@ int main(int argc, char ** argv) {
     }
     std::vector<std::string> moduleNameVec;
 
-    // LLVMUtil::processArguments(argc, argv, arg_num, arg_value, moduleNameVec);
-    // // add extra options
+    LLVMUtil::processArguments(argc, argv, arg_num, arg_value, moduleNameVec);
+    // add extra options
     int orgArgNum = arg_num;
-    // arg_value[arg_num++] = (char*) "-model-consts=true";
+    arg_value[arg_num++] = (char*) "-model-consts=true";
     arg_value[arg_num++] = (char*) "-model-arrays=true";
     arg_value[arg_num++] = (char*) "-pre-field-sensitive=false";
     arg_value[arg_num++] = (char*) "-model-consts=true";
     arg_value[arg_num++] = (char*) "-stat=false";
     assert(arg_num == (orgArgNum + extraArgc) && "more extra arguments? Change the value of extraArgc");
 
-    // llvm::cl::ParseCommandLineOptions(arg_num, arg_value,
-    //                             "Whole Program Points-to Analysis\n");
-    moduleNameVec = OptionBase::parseOptions(
-            arg_num, arg_value, "SVF IR", "[options] <input-bitcode...>"
-    );
-    
+    llvm::cl::ParseCommandLineOptions(arg_num, arg_value,
+                                "Whole Program Points-to Analysis\n");
+
     SVFModule* svfModule = LLVMModuleSet::getLLVMModuleSet()->buildSVFModule(moduleNameVec);
 
     /// Build Program Assignment Graph (SVFIR or PAG)
