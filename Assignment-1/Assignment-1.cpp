@@ -81,13 +81,11 @@ void GraphTraversal::printPath(std::vector<const Edge *> &path)
 //(once for any loop) from src to dst
 void GraphTraversal::DFS(const Edge *src_edge, const Node *dst)
 {
-    //mark node as visited
     visited.insert(src_edge->getSrc());
-    //node seq in the current path during traversal
     path.push_back(src_edge);
     
     if(src_edge->getDst() == dst){ 
-        printPath(path); //print node sequence of current path
+        printPath(path);
     }else{
         for(const Edge *edge: src_edge->getDst()->getOutEdges()){
             if(visited.count(edge->getDst()) == 0){
@@ -99,3 +97,4 @@ void GraphTraversal::DFS(const Edge *src_edge, const Node *dst)
     }
 }
 
+//expected answer: "START: 1->2->3->6->END", "START: 1->2->4->6->END"

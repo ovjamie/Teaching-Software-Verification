@@ -92,6 +92,7 @@ svfir_EXTERNAL_OBJECTS =
 
 bin/svfir: SVFIR/CMakeFiles/svfir.dir/SVFIR.cpp.o
 bin/svfir: SVFIR/CMakeFiles/svfir.dir/build.make
+bin/svfir: /usr/local/lib/libz3.dylib
 bin/svfir: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMBitWriter.a
 bin/svfir: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMCore.a
 bin/svfir: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMipo.a

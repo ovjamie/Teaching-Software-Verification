@@ -140,6 +140,7 @@ bin/assign-4: Assignment-4/CMakeFiles/assign-4.dir/__/Z3Manager/Z3Mgr.cpp.o
 bin/assign-4: Assignment-4/CMakeFiles/assign-4.dir/Assignment-4.cpp.o
 bin/assign-4: Assignment-4/CMakeFiles/assign-4.dir/Test4.cpp.o
 bin/assign-4: Assignment-4/CMakeFiles/assign-4.dir/build.make
+bin/assign-4: /usr/local/lib/libz3.dylib
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMBitWriter.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMCore.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMipo.a
@@ -151,7 +152,7 @@ bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMLin
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMAnalysis.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMScalarOpts.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMSupport.a
-bin/assign-4: /usr/local/lib/libz3.4.12.5.0.dylib
+bin/assign-4: /usr/local/lib/libz3.dylib
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMBitWriter.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMFrontendOpenMP.a
 bin/assign-4: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMScalarOpts.a

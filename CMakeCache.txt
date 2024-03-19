@@ -319,6 +319,12 @@ Terminfo_LIBRARIES:FILEPATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.
 Z3_DIR:PATH=/usr/local/lib/cmake/z3
 
 //Path to a file.
+Z3_INCLUDES:PATH=/usr/local/include
+
+//Path to a library.
+Z3_LIBRARIES:FILEPATH=/usr/local/lib/libz3.dylib
+
+//Path to a file.
 ZLIB_INCLUDE_DIR:PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include
 
 //Path to a library.

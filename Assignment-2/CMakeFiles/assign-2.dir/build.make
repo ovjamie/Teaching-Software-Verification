@@ -108,6 +108,7 @@ assign__2_EXTERNAL_OBJECTS =
 bin/assign-2: Assignment-2/CMakeFiles/assign-2.dir/Assignment-2.cpp.o
 bin/assign-2: Assignment-2/CMakeFiles/assign-2.dir/Test2.cpp.o
 bin/assign-2: Assignment-2/CMakeFiles/assign-2.dir/build.make
+bin/assign-2: /usr/local/lib/libz3.dylib
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMBitWriter.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMCore.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMipo.a
@@ -119,7 +120,7 @@ bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMLin
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMAnalysis.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMScalarOpts.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMSupport.a
-bin/assign-2: /usr/local/lib/libz3.4.12.5.0.dylib
+bin/assign-2: /usr/local/lib/libz3.dylib
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMBitWriter.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMFrontendOpenMP.a
 bin/assign-2: /Users/jamieocumen/svf-teaching/SVF/llvm-16.0.0.obj/lib/libLLVMScalarOpts.a
