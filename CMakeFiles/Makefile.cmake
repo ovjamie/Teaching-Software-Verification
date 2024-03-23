@@ -64,6 +64,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/Cellar/cmake/3.28.3/share/cmake/Modules/Platform/Darwin.cmake"
   "/usr/local/Cellar/cmake/3.28.3/share/cmake/Modules/Platform/UnixPaths.cmake"
   "/usr/local/Cellar/cmake/3.28.3/share/cmake/Modules/SelectLibraryConfigurations.cmake"
+  "/usr/local/lib/cmake/z3/Z3Config.cmake"
+  "/usr/local/lib/cmake/z3/Z3ConfigVersion.cmake"
+  "/usr/local/lib/cmake/z3/Z3Targets-release.cmake"
+  "/usr/local/lib/cmake/z3/Z3Targets.cmake"
   )
 
 # The corresponding makefile is:

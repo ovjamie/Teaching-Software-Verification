@@ -108,7 +108,6 @@ assign__1_EXTERNAL_OBJECTS =
 bin/assign-1: Assignment-1/CMakeFiles/assign-1.dir/Assignment-1.cpp.o
 bin/assign-1: Assignment-1/CMakeFiles/assign-1.dir/Test1.cpp.o
 bin/assign-1: Assignment-1/CMakeFiles/assign-1.dir/build.make
-bin/assign-1: /usr/local/lib/libz3.dylib
 bin/assign-1: Assignment-1/CMakeFiles/assign-1.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/jamieocumen/svf-teaching/Teaching-Software-Verification/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ../bin/assign-1"
 	cd /Users/jamieocumen/svf-teaching/Teaching-Software-Verification/Assignment-1 && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/assign-1.dir/link.txt --verbose=$(VERBOSE)

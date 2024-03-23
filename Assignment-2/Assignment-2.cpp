@@ -33,7 +33,15 @@ using namespace SVFUtil;
 
 /// TODO: Implement your context-sensitive ICFG traversal here to traverse each program path (once for any loop) from src edge to dst node
 void ICFGTraversal::dfs(const ICFGEdge *src, const ICFGNode *dst) {
+    std::pair<const ICFGEdge *, CallStack> curItem = {src, callstack};
+    visited.insert(curItem);
+    path.push_back(src);
     
+    if(src->getDstNode() == dst){
+        printICFGPath();
+    }
+
+
 }
 
 /// TODO: print each path once this method is called, and
@@ -41,7 +49,7 @@ void ICFGTraversal::dfs(const ICFGEdge *src, const ICFGNode *dst) {
 /// Print the path in the format "START: 1->2->4->5->END", where -> indicate an ICFGEdge connects two ICFGNode IDs
 void ICFGTraversal::printICFGPath()
 {
-    
+    std::cout << "START: "; 
 }
 
 /// Program entry, do not change
