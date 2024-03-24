@@ -33,6 +33,7 @@ using namespace SVFUtil;
 
 /// TODO: Implement your context-sensitive ICFG traversal here to traverse each program path (once for any loop) from src edge to dst node
 void ICFGTraversal::dfs(const ICFGEdge *src, const ICFGNode *dst) {
+   
     std::pair<const ICFGEdge *, CallStack> curItem = {src, callstack};
     visited.insert(curItem);
     path.push_back(src);
@@ -41,7 +42,31 @@ void ICFGTraversal::dfs(const ICFGEdge *src, const ICFGNode *dst) {
         printICFGPath();
     }
 
+    for(auto edge: src->getDstNode()->getOutEdges()){
+        if(visited.find({edge, callstack}) == visited.end()){
+            if(edge->isIntraCFGEdge()){
+                dfs(edge, dst);
+            }
+            else if(edge->isCallCFGEdge()){
+                CallICFGNode* callNode =  SVFUtil::cast<CallICFGNode>(edge->getSrcNode());
+                callstack.push_back(callNode->getCallSite());
+                dfs(edge, dst);
+                callstack.pop_back();
+            }
+            else if(edge->isRetCFGEdge()){
+                RetCFGEdge* retEdge = SVFUtil::dyn_cast<RetCFGEdge>(edge);
+                if (!callstack.empty() && callstack.back() == retEdge->getCallSite()) {
+                    dfs(edge, dst);
+                } 
+                else if (callstack.empty()) {
+                    dfs(edge, dst);
+                }
+            }
+        }
+    }
 
+    visited.erase(curItem);
+    path.pop_back();
 }
 
 /// TODO: print each path once this method is called, and
@@ -50,6 +75,17 @@ void ICFGTraversal::dfs(const ICFGEdge *src, const ICFGNode *dst) {
 void ICFGTraversal::printICFGPath()
 {
     std::cout << "START: "; 
+    for(auto edge: path){
+        std::cout << edge->getDstNode()->getId() << "->";
+    }
+    std::cout << "END";
+
+    std::string pathString = "START: ";
+    for (const auto& edge : path) {
+        pathString += std::to_string(edge->getDstNode()->getId()) + "->";
+    }
+    pathString += "END";    
+    paths.insert(pathString);
 }
 
 /// Program entry, do not change
