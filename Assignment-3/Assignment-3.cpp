@@ -92,15 +92,16 @@ void Z3ExampleMgr::test0(){
 void Z3ExampleMgr::test1(){
 
     //  int a;
-
+    expr a = getZ3Expr("a");
     //  a = 0;
-
+    addToSolver(a == getZ3Expr(0));
     //  int b;
-
+    expr b = getZ3Expr("b");
     //  b = a +1;
-    
+    addToSolver(b == getZ3Expr(a + 1));
     //  assert(b > 0);
-
+    getEvalExpr(b > getZ3Expr(0));
+    std::cout<< getEvalExpr(b == getZ3Expr(1)) << "\n";
 }
 
 /*
@@ -123,23 +124,26 @@ void Z3ExampleMgr::test1(){
 void Z3ExampleMgr::test2(){
 
     //  int* p;
-
+    expr p = getZ3Expr("p");
     //  int q;
-
+    expr q = getZ3Expr("q");
     //  int b
-
+    expr b = getZ3Expr("b");
     //  int a;
+    expr a = getZ3Expr("a");
     //  p = &a;
-
+    addToSolver(p == getMemObjAddress("a"));
     //   *p = 0;
-
+    storeValue(p, getZ3Expr(0));
     //   q = *p
-
+    addToSolver(q == loadValue(p));
     //   *p = 3;
-
+    storeValue(p, getZ3Expr(3));
     //   b = *p + 1;
-
+    addToSolver(b == loadValue(p) + getZ3Expr(1));
     //   assert(b > 3);
+    getEvalExpr(b > getZ3Expr(3));
+    std::cout<< getEvalExpr(b == getZ3Expr(4)) << "\n";
 }
 
 
@@ -165,26 +169,30 @@ void Z3ExampleMgr::test2(){
 void Z3ExampleMgr::test3(){
 
     //  int** p;
-
+    expr p = getZ3Expr("p");
     //  int* q;
-
+    expr q = getZ3Expr("q");
     //  int* r;
-
+    expr r = getZ3Expr("r");
     //  int x;
-
+    expr x = getZ3Expr("x");
     // p = malloc(..);
-
+    expr malloc1 = getMemObjAddress("malloc1");
+    addToSolver(p == malloc1);
     // q = malloc(..);
-
+    expr malloc2 = getMemObjAddress("malloc2");
+    addToSolver(q == malloc2);
     // *p = q;
-
+    storeValue(p, q);
     // *q = 10;
-
+    storeValue(q, getZ3Expr(10));
     // r = *p;
-
+    addToSolver(r == loadValue(p));
     // x = *r;
-
+    addToSolver(x == loadValue(r));
     // assert(x==10);
+    getEvalExpr(x == getZ3Expr(10));
+    std::cout<< getEvalExpr(loadValue(q) == getZ3Expr(10)) << "\n";
 }
 
 
@@ -211,30 +219,33 @@ void Z3ExampleMgr::test3(){
 void Z3ExampleMgr::test4(){
 
     //  int* p;
-
+    expr p = getZ3Expr("p");
     //  int* x;
-
+    expr x = getZ3Expr("x");
     //  int* y;
-
+    expr y = getZ3Expr("y");
     //  int a;
-
+    expr a = getZ3Expr("a");
     //  int b;
-
+    expr b = getZ3Expr("b");
     //  p = malloc;
-
+    expr malloc1 = getMemObjAddress("malloc1");
+    addToSolver(p == malloc1);
     //  x = &p[0];
-
+    addToSolver(x == getGepObjAddress(p, 0));
     //  y = &p[1];
-
+    addToSolver(y == getGepObjAddress(p, 1));
     //  *x = 10;
-
+    storeValue(x, getZ3Expr(10));
     //  *y = 11;
-
+    storeValue(y, getZ3Expr(11));
     //  a = *x;
-
+    addToSolver(a == loadValue(x));
     // b = *y;
-
+    addToSolver(b == loadValue(y));
     //  assert((a + b)>20);
+    getEvalExpr((a + b) > getZ3Expr(20));
+    std::cout<< getEvalExpr(a == getZ3Expr(10)) << "\n";
 }
 
 
@@ -268,38 +279,47 @@ void Z3ExampleMgr::test4(){
 void Z3ExampleMgr::test5(){
 
     // struct A* p;
-
+    expr p = getZ3Expr("p");
     // int a;
-
+    expr a = getZ3Expr("a");
     // int* x;
-
+    expr x = getZ3Expr("x");
     // int* q;
-
+    expr q = getZ3Expr("q");
     // int** r;
-
+    expr r = getZ3Expr("r");
     // int* y;
-
+    expr y = getZ3Expr("y");
     // int z;
-
+    expr z = getZ3Expr("z");
     //  p = malloc;
-
+    expr malloc1 = getMemObjAddress("malloc1");
+    addToSolver(p == malloc1);
     //  x = &a;
-
+    expr malloc2 = getMemObjAddress("malloc2");
+    addToSolver(a == malloc2);
+    addToSolver(x == a);
     //  *x = 5;
-
+    addToSolver(loadValue(x) == getZ3Expr(5));
+    // storeValue(x, getZ3Expr(5));
     //  q = &(p->f0);
-
+    addToSolver(q == getGepObjAddress(p, 0));
     //  *q = 10;
-
+    // storeValue(q, getZ3Expr(10));
+    addToSolver(loadValue(q) == getZ3Expr(10));
     //   r = &(p->f1);
-
+    addToSolver(r == getGepObjAddress(p, 1));
     //   *r = x;
-
+    // storeValue(r, x);
+    addToSolver(loadValue(r) == x);
     //   y = *r;
-
+    // storeValue(y, r);
+    addToSolver(y == loadValue(r));
     //   z = *q + *y
-
+    addToSolver(z == loadValue(q) + loadValue(y));
     //  assert(z==15);
+    getEvalExpr(z == getZ3Expr(15));
+    std::cout<< getEvalExpr(loadValue(q) == getZ3Expr(10)) << "\n";
 }
 
 
@@ -320,20 +340,26 @@ void Z3ExampleMgr::test5(){
 void Z3ExampleMgr::test6(){
 
     // int argv
-
+    expr argv = getZ3Expr("argv");
     //  int a;
-
+    expr a = getZ3Expr("a");
     //  int b;
-
+    expr b = getZ3Expr("b");
     //  a = argv + 1;
-
+    addToSolver(a == getZ3Expr(argv + getZ3Expr(1)));
     //  b = 5;
-
+    addToSolver(b == getZ3Expr(5));
+    
+    bool cond = (getEvalExpr(argv > getZ3Expr(10))).is_true();
     // if(a > 10)
-
-    // b = a;
-
+    if(cond){
+        // b = a;
+        addToSolver(argv > getZ3Expr(10));
+        addToSolver(b == a);
+    }
     //  assert(b>=5);
+    getEvalExpr(b >= getZ3Expr(5));
+    std::cout<< getEvalExpr(b == getZ3Expr(5)) << "\n";
 }
 
 /*
@@ -353,17 +379,26 @@ int main() {
 void Z3ExampleMgr::test7(){
 
     // int x;
-
+    expr x = getZ3Expr("x");
     // int y;
-
+    expr y = getZ3Expr("y");
+    solver.push();
     // int z;
-
+    expr z = getZ3Expr("z");
+    addToSolver(z == getZ3Expr(2));
     // int k;
-
+    expr k = getEvalExpr(z);
+    solver.pop();
     // y = foo(2);
 
     // x = foo(3);
-
+    addToSolver(y == k);
+    solver.push();
+    addToSolver(z == getZ3Expr(3));
+    k = getEvalExpr(z);
+    solver.pop();
+    addToSolver(x == k);
     // assert(x== 3 && y== 2); 
-
+    getEvalExpr(x == getZ3Expr(3) && y == getZ3Expr(2));
+    std::cout<< getEvalExpr(x == getZ3Expr(3) && y == getZ3Expr(2)) << "\n";
 }
